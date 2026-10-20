@@ -1,0 +1,30 @@
+﻿<html>
+<head><link rel="stylesheet" href="/static/style.css"></head>
+<body class="bg">
+<div class="box">
+<h2>Jewelry Planner</h2>
+<form method="post" action="/planner">
+<label>Enter Your Budget: </label><br><br>
+<input type="number" name="budget" value="{{ budget }}" placeholder="e.g. 60000" style="padding:8px; width:80%">
+<br><br>
+<button type="submit" class="btn-blue" style="padding:10px 20px;">Find My Ideas</button>
+</form>
+
+<hr>
+<h3>Budget: Rs. {{ budget }}/-</h3>
+
+{% for name, price, desc in ideas %}
+<div style="background:#fdf0e6; padding:10px; border-radius:8px; margin:10px 0; border:1px solid #f0c0a0;">
+<b>{{ name }}</b> - Rs. {{ price }}/- <br>
+<small>{{ desc }}</small>
+</div>
+{% endfor %}
+
+{% if ideas|length == 0 and budget > 0 %}
+<p>No ideas found for this budget, try higher!</p>
+{% endif %}
+
+<br><a href="/dashboard">Back to Dashboard</a>
+</div>
+</body>
+</html>
